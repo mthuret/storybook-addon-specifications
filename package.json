@@ -1,0 +1,41 @@
+{
+  "name": "@kadira/storybook-addon-hello",
+  "version": "1.0.4",
+  "description": "Hello World addon for storybook",
+  "main": "dist/index.js",
+  "scripts": {
+    "deploy-storybook": "storybook-to-ghpages",
+    "prepublish": "node .scripts/npm-prepublish.js",
+    "storybook": "start-storybook -p 9001",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadirahq/storybook-addon-hello.git"
+  },
+  "keywords": [
+    "storybook"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kadirahq/storybook-addon-hello/issues"
+  },
+  "homepage": "https://github.com/kadirahq/storybook-addon-hello#readme",
+  "devDependencies": {
+    "@kadira/storybook": "^2.2.0",
+    "@kadira/storybook-addons": "^1.3.0",
+    "@kadira/storybook-ui": "^3.0.0",
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "shelljs": "^0.7.3"
+  },
+  "peerDependencies": {
+    "@kadira/storybook-addons": "^1.3.0",
+    "react": "^0.14.7 || ^15.0.0",
+    "react-dom": "^0.14.7 || ^15.0.0"
+  }
+}

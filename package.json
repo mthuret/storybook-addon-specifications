@@ -1,5 +1,5 @@
 {
-  "name": "@kadira/storybook-addon-hello",
+  "name": "storybook-addon-specifications",
   "version": "1.0.4",
   "description": "Add tests to your react storybook stories",
   "main": "dist/index.js",

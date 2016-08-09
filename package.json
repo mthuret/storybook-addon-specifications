@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-specifications",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "description": "Add tests to your react storybook stories",
   "main": "dist/index.js",
   "scripts": {
@@ -50,7 +50,7 @@
     "setupFiles": [
       "./.storybook/__conf__/jestMockConfig.js"
     ],
-    "testRegex" :  "../.*.ci.jest.stories.js$",
+    "testRegex": "../.*.ci.jest.stories.js$",
     "automock": false,
     "globals": {
       "__TESTS__": true

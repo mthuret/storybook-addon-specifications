@@ -36,7 +36,7 @@ function register() {
     _storybookAddons2.default.addPanel(_.PANEL_ID, {
       title: 'Specifications',
       render: function render() {
-        return _react2.default.createElement(_Specifications2.default, { channel: channel });
+        return _react2.default.createElement(_Specifications2.default, { api: api, channel: channel });
       }
     });
   });

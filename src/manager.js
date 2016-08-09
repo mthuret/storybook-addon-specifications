@@ -17,7 +17,7 @@ export function register() {
     // will be executed to render the tab content.
     addons.addPanel(PANEL_ID, {
       title: 'Specifications',
-      render: () => <Specifications channel={channel} />
+      render: () => <Specifications api={api} channel={channel} />
     });
   });
 }

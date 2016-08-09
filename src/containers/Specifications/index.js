@@ -11,6 +11,9 @@ export default class Specifications extends Component {
 
   componentDidMount() {
     this.props.channel.on(EVENT_ID, this._listener);
+    this.props.api.onStory( () => {
+      this.setState({results: {wrongResults: [], goodResults: []}});
+    });
   }
 
   componentWillUnmount() {

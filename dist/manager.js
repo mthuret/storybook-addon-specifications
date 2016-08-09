@@ -13,9 +13,9 @@ var _storybookAddons = require('@kadira/storybook-addons');
 
 var _storybookAddons2 = _interopRequireDefault(_storybookAddons);
 
-var _HelloWorld = require('./containers/HelloWorld');
+var _Specifications = require('./containers/Specifications');
 
-var _HelloWorld2 = _interopRequireDefault(_HelloWorld);
+var _Specifications2 = _interopRequireDefault(_Specifications);
 
 var _ = require('./');
 
@@ -34,9 +34,9 @@ function register() {
     // The `title` field will be used as the tab title and the `render` field
     // will be executed to render the tab content.
     _storybookAddons2.default.addPanel(_.PANEL_ID, {
-      title: 'Hello World',
+      title: 'Specifications',
       render: function render() {
-        return _react2.default.createElement(_HelloWorld2.default, { channel: channel });
+        return _react2.default.createElement(_Specifications2.default, { channel: channel });
       }
     });
   });

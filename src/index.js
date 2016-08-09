@@ -1,7 +1,7 @@
 // addons, panels and events get unique names using a prefix
-export const ADDON_ID = 'kadirahq/storybook-addon-hello';
-export const PANEL_ID = `${ADDON_ID}/hello-panel`;
-export const EVENT_ID = `${ADDON_ID}/hello-event`;
+export const ADDON_ID = 'storybook-addon-specifications';
+export const PANEL_ID = `${ADDON_ID}/specifications-panel`;
+export const EVENT_ID = `${ADDON_ID}/specifications-event`;
 
 export { register } from './manager';
-export { sayHello } from './preview';
+export { specs, describe, it } from './preview';

@@ -1,6 +1,6 @@
 import React from 'react';
 import addons from '@kadira/storybook-addons';
-import HelloWorld from './containers/HelloWorld'
+import Specifications from './containers/Specifications'
 import { ADDON_ID, PANEL_ID } from './';
 
 // register function will call addons.register to register an addon loader
@@ -16,8 +16,8 @@ export function register() {
     // The `title` field will be used as the tab title and the `render` field
     // will be executed to render the tab content.
     addons.addPanel(PANEL_ID, {
-      title: 'Hello World',
-      render: () => <HelloWorld channel={channel} />
+      title: 'Specifications',
+      render: () => <Specifications channel={channel} />
     });
   });
 }

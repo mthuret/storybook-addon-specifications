@@ -24,7 +24,7 @@ const buttonSpecs = describe('Hello World', function () {
 });
 
 stories.add('Hello World', function () {
-  specs(buttonSpecs);
+  specs(() => buttonSpecs);
   return helloWorldStory;
 });
 
@@ -34,13 +34,13 @@ const helloEarthStory =
   </button>;
 
 const helloEarthSpecs = describe('Hello Earth', function () {
-  it('Should indicate that only one item is left', function () {
+  it('Should have the Hello Earth label', function () {
     let output = mount(helloEarthStory);
     expect(output.text()).toContain('Hello Earth');
   });
 });
 
 stories.add('Hello Earth', function () {
-  specs(helloEarthSpecs);
+  specs(() => helloEarthSpecs);
   return helloEarthStory;
 });

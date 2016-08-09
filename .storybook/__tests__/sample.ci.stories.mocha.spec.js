@@ -23,7 +23,7 @@ const buttonSpecs = describe('Hello World', function () {
 });
 
 stories.add('Hello World', function () {
-  specs(buttonSpecs);
+  specs(() => buttonSpecs);
   return helloWorldStory;
 });
 
@@ -40,6 +40,6 @@ const helloEarthSpecs = describe('Hello Earth', function () {
 });
 
 stories.add('Hello Earth', function () {
-  specs(helloEarthSpecs);
+  specs(() => helloEarthSpecs);
   return helloEarthStory;
 });

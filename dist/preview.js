@@ -14,30 +14,34 @@ var _ = require('./');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var results = {
-  goodResults: [],
-  wrongResults: []
-};
+var currentStory = "";
+var results = {};
 
 function specs(specs) {
-  specs();
+  var storyName = specs();
+
   // get `channel` from the addon API
   var channel = _storybookAddons2.default.getChannel();
   // send the message using the channel
-  channel.emit(_.EVENT_ID, { results: results });
+  channel.emit(_.EVENT_ID, { results: results[storyName] });
 }
 
-var describe = exports.describe = function describe(desc, func) {
-  results.goodResults = [];
-  results.wrongResults = [];
-  return func;
+var describe = exports.describe = function describe(storyName, func) {
+  currentStory = storyName;
+  results[currentStory] = {
+    goodResults: [],
+    wrongResults: []
+  };
+
+  func();
+  return storyName;
 };
 
 var it = exports.it = function it(desc, func) {
   try {
     func();
-    results.goodResults.push(desc);
+    results[currentStory].goodResults.push(desc);
   } catch (e) {
-    results.wrongResults.push({ spec: desc, message: e.message });
+    results[currentStory].wrongResults.push({ spec: desc, message: e.message });
   }
 };

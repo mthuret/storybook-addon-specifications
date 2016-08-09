@@ -20,6 +20,8 @@ import 'storybook-addon-specifications/register';
 
 Import the `specs, describe and it` functions and use it to write your tests. This example uses Enzyme and Chai to perform the testing.
 
+The first parameter of the describe function **must be the same** as the story's name.
+
 ```js
 import { storiesOf } from '@kadira/storybook'
 import { specs, describe, it } from 'storybook-addon-specifications'
@@ -35,7 +37,7 @@ stories.add('Hello World', function () {
       Hello World
     </button>;
 
-  specs(describe('Hello World', function () {
+  specs(() => describe('Hello World', function () {
     it('Should have the Hello World label', function () {
       let output = mount(helloWorldStory);
       expect(output.text()).toContain('Hello Wrld');
@@ -69,9 +71,9 @@ Writing tests directly next to the component declaration for the story is alread
 
 To do that, the idea is to add to your test runner, all the files used for declaring stories.
 But because this addon redefine describe and it functions, you'll need some extra-configuration to make the tests pass within the test runner.
-You'll also need to declare to change a little bit your stories declaration (see ./.storybook/__tests__/sample.ci.jest.stories.js file as an example)
+You'll also need to change a little bit your stories declaration (see ./.storybook/__tests__/sample.ci.jest.stories.js file as an example)
 
-You'll find in this directory the example using JEST or MOCHA.
+You'll find in this directory examples using JEST or MOCHA.
 
 ### Using JEST
 

@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-specifications",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Add tests to your react storybook stories",
   "main": "dist/index.js",
   "scripts": {

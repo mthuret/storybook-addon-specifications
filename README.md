@@ -2,6 +2,8 @@
 
 This addon for storybook will allow you to write tests based on your stories and display results directly inside storybook.
 
+**needs at least [react-storybook](https://github.com/kadirahq/react-storybook) 2.2.0**
+
 ![](docs/screenshot.png)
 
 ## Getting Started
@@ -53,7 +55,7 @@ stories.add('Hello World', function () {
 });
 ```
 
-Note : if you use enzyme, you'll need to add the following  configuration to your webpack.config.js file
+Note : if you use enzyme, you'll need to add the following  configuration to your webpack.config.js file. You also needs to add the json library to your dev dependencies. 
 
 ```
 externals: {

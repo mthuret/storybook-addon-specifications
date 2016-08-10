@@ -1,8 +1,6 @@
 import {storiesOf as storiesOfReal,
     action as actionReal,
 linkTo as linkToReal} from "@kadira/storybook"
-/*import { specs as specsReal, describe as describeReal,
-  it as itReal } from '@kadira/storybook-addon-specifications'*/
 import { specs as specsReal, describe as describeReal,
   it as itReal } from '../src'
 

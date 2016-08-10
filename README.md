@@ -1,4 +1,4 @@
-# Specifications Addon
+# Specifications Addon [![npm version](https://img.shields.io/npm/v/storybook-addon-specifications.svg)](https://www.npmjs.com/package/storybook-addon-specifications)
 
 This addon for storybook will allow you to write tests based on your stories and display results directly inside storybook.
 

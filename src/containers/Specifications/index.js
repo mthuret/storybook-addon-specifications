@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import SpecificationsComponent from "../../components/Specifications/";
 import {EVENT_ID} from "../../";
 
+
 export default class Specifications extends Component {
   constructor(props, ...args) {
     super(props, ...args);
@@ -11,7 +12,7 @@ export default class Specifications extends Component {
 
   componentDidMount() {
     this.props.channel.on(EVENT_ID, this._listener);
-    this.props.channel.on('setCurrentStory', (data) => {
+    this.props.api.onStory((data) => {
       this.setState({ results: { wrongResults: [], goodResults: [] } });
     });
   }

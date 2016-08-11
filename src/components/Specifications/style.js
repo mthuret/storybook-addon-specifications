@@ -1,4 +1,6 @@
-export default {
+import {StyleSheet} from "aphrodite";
+
+export default StyleSheet.create({
   wrapper: {
     flex: 1,
     display: 'flex',
@@ -9,18 +11,39 @@ export default {
     letterSpacing: 1,
     textDecoration: 'none',
     textTransform: 'uppercase',
+    listStyleType: 'none'
   },
-  specs: {
-    errors: {
-      color: 'red',
-      message: {
-        backgroundColor: 'rgb(250, 250, 250)',
-        padding: '10px',
-        margin: '10px'
-      }
-    },
-    pass: {
-      color: "green"
+  error: {
+    ':before': {
+      content: "'✘'",
+      padding: '3px 5px',
+      backgroundColor: 'red'
     }
-  }
-}
+  },
+
+  li: {
+    ':before': {
+      marginRight: '5px',
+      marginTop: '11px',
+      fontSize: '70%',
+      color: 'white',
+      fontWeight: 'bold',
+      borderRadius: '12px',
+      float: 'left'
+    }
+  },
+
+  message: {
+    backgroundColor: 'rgb(250, 250, 250)',
+    padding: '10px',
+    margin: '10px'
+  },
+
+  pass: {
+    ':before': {
+      content: "'✔'",
+      padding: '4px 5px',
+      backgroundColor: 'green'
+    }
+  },
+});

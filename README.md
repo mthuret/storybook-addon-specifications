@@ -75,7 +75,6 @@ Writing tests directly next to the component declaration for the story is alread
 
 To do that, the idea is to add to your test runner, all the files used for declaring stories.
 But because this addon redefine describe and it functions, you'll need some extra-configuration to make the tests pass within the test runner.
-You'll also need to change a little bit your stories declaration (see ./.storybook/__tests__/sample.ci.jest.stories.js file as an example)
 
 You'll find in this directory examples using JEST or MOCHA.
 
@@ -103,13 +102,23 @@ Create a __mocks__ directory within .storybook and add also a facade.js file.
 ```js
 export const storiesOf = function storiesOf() {
   var api = {};
-  api.add = ()=> { return api; };
-  api.addWithInfo = ()=> { return api; };
+  api.add = (name, func)=> {
+    func();
+    return api;
+  };
+  api.addWithInfo = (name, func)=> {
+    func();
+    return api;
+  };
   return api;
 };
 export const action = () => {};
 
 export const linkTo = () => {};
+
+export const specs = (spec) => {
+  spec();
+};
 
 export const describe = jasmine.currentEnv_.describe;
 export const it = jasmine.currentEnv_.it;
@@ -143,13 +152,23 @@ Create wherever you want a new file that will mock the storybook api
 ```js
 export const storiesOf = function storiesOf() {
   var api = {};
-  api.add = ()=> { return api; };
-  api.addWithInfo = ()=> { return api; };
+  api.add = (name, func)=> {
+    func();
+    return api;
+  };
+  api.addWithInfo = (name, func)=> {
+    func();
+    return api;
+  };
   return api;
 };
 export const action = () => {};
 
 export const linkTo = () => {};
+
+export const specs = (spec) => {
+  spec();
+};
 
 export const describe = describe;
 export const it = it;

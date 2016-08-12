@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-specifications",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Add tests to your react storybook stories",
   "main": "dist/index.js",
   "scripts": {
@@ -16,7 +16,10 @@
     "url": "git+https://github.com/mthuret/storybook-addon-specifications.git"
   },
   "keywords": [
-    "storybook", "tests", "react", "specifications"
+    "storybook",
+    "tests",
+    "react",
+    "specifications"
   ],
   "license": "MIT",
   "bugs": {

@@ -42,6 +42,7 @@ var it = exports.it = function it(desc, func) {
     func();
     results[currentStory].goodResults.push(desc);
   } catch (e) {
+    console.error(currentStory + ' - ' + desc + ' : ' + e);
     results[currentStory].wrongResults.push({ spec: desc, message: e.message });
   }
 };

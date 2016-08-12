@@ -16,7 +16,7 @@
     "url": "git+https://github.com/mthuret/storybook-addon-specifications.git"
   },
   "keywords": [
-    "storybook"
+    "storybook", "tests", "react", "specifications"
   ],
   "license": "MIT",
   "bugs": {

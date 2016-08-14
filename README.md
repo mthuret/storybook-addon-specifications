@@ -1,12 +1,19 @@
 # Specifications Addon [![npm version](https://img.shields.io/npm/v/storybook-addon-specifications.svg)](https://www.npmjs.com/package/storybook-addon-specifications)
 
+> **Needs at least [react-storybook](https://github.com/kadirahq/react-storybook) 2.2.0**
+
 This addon for storybook will allow you to write tests based on your stories and display results directly inside storybook.
 
-If you want to learn more about the ideas behind this addon, you can read [this article](https://medium.com/@mlthuret/building-a-react-components-living-documentation-using-react-storybook-5f11f0e7d23e#.5g58g5i3t).
-
-**needs at least [react-storybook](https://github.com/kadirahq/react-storybook) 2.2.0**
+> **If you want to learn more about the ideas behind this addon, you can read this article : [Building a react components living documentation using react-storybook.](https://medium.com/@mlthuret/building-a-react-components-living-documentation-using-react-storybook-5f11f0e7d23e#.5g58g5i3t).**
 
 ![](docs/screenshot.png)
+
+## Table of contents
+
+* [Getting Started](#getting-started)
+* [Use your stories with your ci](#use-your-stories-with-your-ci)
+  * [Using JEST](#using-jest)
+  * [Using Mocha](#using-mocha)
 
 ## Getting Started
 
@@ -22,7 +29,7 @@ Add this line to your `addons.js` file (create this file inside your storybook c
 import 'storybook-addon-specifications/register';
 ```
 
-Import the `specs, describe and it` functions and use it to write your tests. This example uses Enzyme and Chai to perform the testing.
+Import the `specs, describe and it` functions and use it to write your tests. This example uses *enzyme* and *expect* to perform the testing.
 
 The first parameter of the describe function **must be the same** as the story's name.
 
@@ -36,54 +43,49 @@ import expect from "expect";
 const stories = storiesOf('Button', module);
 
 stories.add('Hello World', function () {
-  const helloWorldStory =
+  const story =
     <button onClick={action('Hello World')}>
       Hello World
     </button>;
 
   specs(() => describe('Hello World', function () {
     it('Should have the Hello World label', function () {
-      let output = mount(helloWorldStory);
-      expect(output.text()).toContain('Hello Wrld');
-    });
-
-    it('Should have the Hello World label', function () {
-      let output = mount(helloWorldStory);
+      let output = mount(story);
       expect(output.text()).toContain('Hello World');
     });
   }));
 
-  return helloWorldStory;
+  return story;
 });
 ```
 
-Note : if you use enzyme, you'll need to add the following  configuration to your webpack.config.js file. You also needs to add the json library to your dev dependencies. 
+> Note : if you use enzyme, you will need to add the following lines to your webpack.config.js file. You also needs to add the json library to your dev dependencies. 
 
-```
-externals: {
-    'jsdom': 'window',
-    'cheerio': 'window',
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': 'window',
-    'react/addons': true,
-  }
-```
+>```
+>externals: {
+>    'jsdom': 'window',
+>    'cheerio': 'window',
+>    'react/lib/ExecutionEnvironment': true,
+>    'react/lib/ReactContext': 'window',
+>    'react/addons': true,
+>  }
+>```
 
-## Use your stories with you CI
+## Use your stories with your CI
 
-Writing tests directly next to the component declaration for the story is already a great thing, but it would be better if those tests can be reused with our CI.
+Writing tests directly next to the component declaration used for the story is already a great thing, but it would be better if those tests can be reused with our CI.
 
-To do that, the idea is to add to your test runner, all the files used for declaring stories.
+To do that, the idea is to add to the test runner, all the files used for declaring stories.
 But because this addon redefine describe and it functions, you'll need some extra-configuration to make the tests pass within the test runner.
 
-You'll find in this directory examples using JEST or MOCHA.
+This repository has a [directory full of examples](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook) where you can find everything that is describe here. 
 
 ### Using JEST
 
 You can use the mocking functionality of jest to switch between the real describe and it implementation of jest or
-the specifications addon one.
+the one for this addon.
 
-Inside .storybook, you can add a facade.js file with the following content :
+Inside .storybook, add a facade.js file with the following content :
 
 ```js
 import {storiesOf as storiesOfReal, action as actionReal, linkTo as linkToReal} from "@kadira/storybook"
@@ -124,13 +126,13 @@ export const describe = jasmine.currentEnv_.describe;
 export const it = jasmine.currentEnv_.it;
 ```
 
-Create also a jest config file with the following content :
+Create or add to your jest config file the following line :
 
 ```js
 jest.mock('./.storybook/facade');
 ```
 
-**Inside your stories file you'll use the .storybook/facade.js file for imports**.
+> **Inside your stories file you must now use the .storybook/facade.js file for imports**.
 
 Finally add this to your jest configuration :
 

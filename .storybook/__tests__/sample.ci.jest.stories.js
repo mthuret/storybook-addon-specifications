@@ -15,11 +15,6 @@ stories.add('Hello World', function () {
   specs(() => describe('Hello World', function () {
     it('Should have the Hello World label', function () {
       let output = mount(helloWorldStory);
-      expect(output.text()).toContain('Hello Wrld');
-    });
-
-    it('Should have the Hello World label', function () {
-      let output = mount(helloWorldStory);
       expect(output.text()).toContain('Hello World');
     });
   }));

@@ -32,5 +32,4 @@ export const snapshot = (name, story) => {
 
 export const describe = jasmine.currentEnv_.describe;
 export const it = jasmine.currentEnv_.it;
-export const expect = jasmine.currentEnv_.expect;
 

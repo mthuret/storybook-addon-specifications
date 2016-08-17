@@ -1,6 +1,6 @@
 # Specifications Addon [![npm version](https://img.shields.io/npm/v/storybook-addon-specifications.svg)](https://www.npmjs.com/package/storybook-addon-specifications)
 
-> **Needs at least [react-storybook](https://github.com/kadirahq/react-storybook) 2.2.0**
+> **Needs at least [react-storybook](https://github.com/kadirahq/react-storybook) 2.2.1**
 
 This addon for storybook will allow you to write tests based on your stories and display results directly inside storybook.
 
@@ -11,8 +11,9 @@ This addon for storybook will allow you to write tests based on your stories and
 ## Table of contents
 
 * [Getting Started](#getting-started)
-* [Use your stories with your ci](#use-your-stories-with-your-ci)
+* [Use your stories with a test runner](#use-your-stories-with-a-test-runner)
   * [Using JEST](#using-jest)
+    * [Snapshot all your stories automatically](#snapshot-all-your-stories-automatically)
   * [Using Mocha](#using-mocha)
 
 ## Getting Started
@@ -71,9 +72,9 @@ stories.add('Hello World', function () {
 >  }
 >```
 
-## Use your stories with your CI
+## Use your stories with a test runner
 
-Writing tests directly next to the component declaration used for the story is already a great thing, but it would be better if those tests can be reused with our CI.
+Writing tests directly next to the component declaration used for the story is already a great thing, but it would be better if those tests can be reused with our test runner, and later be used with our CI.
 
 To do that, the idea is to add to the test runner, all the files used for declaring stories.
 But because this addon redefine describe and it functions, you'll need some extra-configuration to make the tests pass within the test runner.
@@ -144,6 +145,64 @@ Finally add this to your jest configuration :
     "automock": false,
     }
 ```
+
+#### Snapshot all your stories automatically
+
+>**Warning :** This part will describe how to add automatically jest snapshot to every story you write. It will allow you to take advantage of this jest feature but will not have any effect inside storybook. Indeed, you don't even need to add this addon to your project if you don't plan to use the specs() function. If I describe the idea here, it's only because it uses the trick I explain before allowing you to write tests inside stories and still be able to execute them with a test runner. 
+
+If you want to use jest snapshot testing with every story you write, that's totally possible. All you need to do is modify a bit the facade.js mock file to look like this :
+
+```js
+import {mount} from "enzyme";
+
+export const storiesOf = function storiesOf() {
+  var api = {};
+  var story;
+  api.add = (name, func)=> {
+    story = func();
+    snapshot(name, story);
+    return api;
+  };
+  api.addWithInfo = (name, func)=> {
+    story = func();
+    snapshot(name, story);
+    return api;
+  };
+  return api;
+};
+export const action = () => {};
+
+export const linkTo = () => {};
+
+export const specs = (spec) => {
+  spec();
+};
+
+export const snapshot = (name, story) => {
+  describe(name + ' snapshot', function () {
+    it(name, function () {
+      const tree = mount(story).html();
+      expect(tree).toMatchSnapshot();
+    });
+  });
+};
+
+export const describe = jasmine.currentEnv_.describe;
+export const it = jasmine.currentEnv_.it;
+```
+
+For every story added to storybook, it will make a snapshot. 
+
+Here, I use enzyme to render the component under testing. I do that because it appears that if you use enzyme for others tests, it doesn't mix well with react-test-renderer. But if you do not use enzyme for your tests, then you should be good to go with react-test-renderer rendering. 
+
+If for any reason you want to choose stories that will be snapshoted, that's also possible.
+ 1. remove snapshot() function calls from add and addWithInfo in facade.js mock file. 
+ 2. use the snapshot() function directly inside the story like you do with specs()
+ 3. Add this line to the facade.js file used for import functions.
+```js
+export const snapshot = () => {};
+```
+When storybook is going to run, it will do nothing with the snapshot function. 
 
 ### Using Mocha
 

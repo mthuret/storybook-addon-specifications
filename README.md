@@ -100,7 +100,7 @@ export const describe = describeReal;
 export const it = itReal;
 ```
 
-Create a __mocks__ directory within .storybook and add also a facade.js file.
+Create a \_\_mocks\_\_ directory within .storybook and add also a facade.js file.
 
 ```js
 export const storiesOf = function storiesOf() {

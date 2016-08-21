@@ -148,13 +148,13 @@ Finally add this to your jest configuration :
 
 #### Snapshot all your stories automatically
 
->**Warning :** This part will describe how to add automatically jest snapshot to every story you write. It will allow you to take advantage of this jest feature but will not have any effect inside storybook. Indeed, you don't even need to add this addon to your project if you don't plan to use the specs() function. If I describe the idea here, it's only because it uses the trick I explain before allowing you to write tests inside stories and still be able to execute them with a test runner. 
+>**Warning :** This part will describe how to add automatically jest snapshot to every story you write. It will allow you to take advantage of this jest feature but will not have any effect inside storybook. Indeed, you don't even need to add this addon to your project if you don't plan to use the specs() function. If I describe the idea here, it's only because it uses the trick I explained before allowing you to write tests inside stories and still be able to execute them with a test runner.
 
-If you want to use jest snapshot testing with every story you write, that's totally possible. All you need to do is modify a bit the facade.js mock file to look like this :
+![](docs/snapshot-jest.png)
+
+The only thing to do is to modify the facade.js mock file (the one used by jest) to look like this :
 
 ```js
-import {mount} from "enzyme";
-
 export const storiesOf = function storiesOf() {
   var api = {};
   var story;
@@ -175,28 +175,25 @@ export const action = () => {};
 export const linkTo = () => {};
 
 export const specs = (spec) => {
-  spec();
+  spec()
 };
 
 export const snapshot = (name, story) => {
-  describe(name + ' snapshot', function () {
     it(name, function () {
-      const tree = mount(story).html();
+      let renderer = require("react-test-renderer");
+      const tree = renderer.create(story).toJSON();
       expect(tree).toMatchSnapshot();
     });
-  });
 };
 
 export const describe = jasmine.currentEnv_.describe;
 export const it = jasmine.currentEnv_.it;
 ```
 
-For every story added to storybook, it will make a snapshot. 
+Every story added to storybook, will now have a snapshot.
 
-Here, I use enzyme to render the component under testing. I do that because it appears that if you use enzyme for others tests, it doesn't mix well with react-test-renderer. But if you do not use enzyme for your tests, then you should be good to go with react-test-renderer rendering. 
-
-If for any reason you want to choose stories that will be snapshoted, that's also possible.
- 1. remove snapshot() function calls from add and addWithInfo in facade.js mock file. 
+If for any reason you want to choose when to snapshot a story, that's also possible.
+ 1. remove snapshot() function calls from add and addWithInfo in facade.js mock file.
  2. use the snapshot() function directly inside the story like you do with specs()
  3. Add this line to the facade.js file used for import functions.
 ```js

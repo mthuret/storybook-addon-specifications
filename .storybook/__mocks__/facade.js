@@ -1,5 +1,3 @@
-import {mount} from "enzyme";
-
 export const storiesOf = function storiesOf() {
   var api = {};
   var story;
@@ -20,12 +18,13 @@ export const action = () => {};
 export const linkTo = () => {};
 
 export const specs = (spec) => {
-  spec();
+  spec()
 };
 
 export const snapshot = (name, story) => {
     it(name, function () {
-      const tree = mount(story).html();
+      let renderer = require("react-test-renderer");
+      const tree = renderer.create(story).toJSON();
       expect(tree).toMatchSnapshot();
     });
 };

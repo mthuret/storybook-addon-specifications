@@ -10,7 +10,6 @@ export default StyleSheet.create({
     fontSize: 12,
     letterSpacing: 1,
     textDecoration: 'none',
-    textTransform: 'uppercase',
     listStyleType: 'none'
   },
   error: {

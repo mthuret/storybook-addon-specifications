@@ -20,3 +20,7 @@ export const specs = (spec) => {
 
 export const describe = describe;
 export const it = it;
+export const after = after;
+export const before = before;
+export const afterEach = afterEach;
+export const beforeEach = beforeEach;

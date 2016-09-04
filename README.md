@@ -13,8 +13,10 @@ This addon for storybook will allow you to write tests based on your stories and
 * [Getting Started](#getting-started)
 * [Use your stories with a test runner](#use-your-stories-with-a-test-runner)
   * [Using JEST](#using-jest)
+    * [Hooks and specifics jest features]()
     * [Snapshot all your stories automatically](#snapshot-all-your-stories-automatically)
   * [Using Mocha](#using-mocha)
+    * [Hooks and specifics mocha features]()
 
 ## Getting Started
 
@@ -60,7 +62,7 @@ stories.add('Hello World', function () {
 });
 ```
 
-> Note : if you use enzyme, you will need to add the following lines to your webpack.config.js file. You also needs to add the json library to your dev dependencies. 
+> Note : if you use enzyme, you will need to add the following lines to your webpack.config.js file. You also needs to add the **json library** to your dev dependencies.
 
 >```
 >externals: {
@@ -71,6 +73,8 @@ stories.add('Hello World', function () {
 >    'react/addons': true,
 >  }
 >```
+
+You can use `beforeEach, before, after and afterEach` functions to mutualize or clean up some stuff.
 
 ## Use your stories with a test runner
 
@@ -146,6 +150,20 @@ Finally add this to your jest configuration :
     }
 ```
 
+#### Hooks and specifics jest features
+
+This addon now supports :
+  * beforeEach
+  * afterEach
+  * fit (no effect on storybook specs execution)
+  * xit
+  * xdescribe
+
+Please refer to jest documentation to know how to use them.
+
+If you want to use that with storybook, you'll need to add them to your facade and facade-mock files.
+You can find the complete configuration by looking at the [samples directory](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook)
+
 #### Snapshot all your stories automatically
 
 >**Warning :** This part will describe how to add automatically jest snapshot to every story you write. It will allow you to take advantage of this jest feature but will not have any effect inside storybook. Indeed, you don't even need to add this addon to your project if you don't plan to use the specs() function. If I describe the idea here, it's only because it uses the trick I explained before allowing you to write tests inside stories and still be able to execute them with a test runner.
@@ -203,9 +221,14 @@ When storybook is going to run, it will do nothing with the snapshot function.
 
 ### Using Mocha
 
-Create the same facade.js file than for the jest configuration
+Please note that when using mocha as a test runner, all storybook functions that you
+ use on your stories files are going to become globally defined. (see step4).
+The reason for that simple, unlike Jest, mocking functions is going to be made
+by redefining them globally (see step 3).
 
-Create wherever you want a new file that will mock the storybook api
+1. Create the same facade.js file than for the jest configuration
+
+2. Create wherever you want a new file that will mock the storybook api
 
 ```js
 export const storiesOf = function storiesOf() {
@@ -232,7 +255,7 @@ export const describe = describe;
 export const it = it;
 ```
 
-Then create or add those line to a mocha config file :
+3. Then create or add those lines to a mocha config file :
 
 ```js
 import {storiesOf, action, linkTo, describe, it} from "path/to/your/mock/file";
@@ -243,8 +266,61 @@ global.describe = describe;
 global.it = it;
 ```
 
+4. And also those lines to the storybook config file
+
+```js
+import {storiesOf, action, linkTo, specs, describe, it} from "./facade";
+
+global.storiesOf = storiesOf;
+global.action = action;
+global.linkTo = linkTo;
+global.specs = specs;
+global.describe = describe;
+global.it = it;
+```
+
 Finally add this to your mocha running script
 
 ```
--w test/path/to/your/config/file.js
+-require test/path/to/your/config/file.js
 ```
+
+> **Warning** : if you already have some specific configuration for mocha, please note
+that this sample needs to be adapt for your specific use-case. Please also note that
+in the sample directory of this repository, the mocha config file is a little bit more
+complexe in order to be able to use jsdom.
+
+If you need it, and don't use it already, you can add those line :
+
+```js
+/**
+ *Mocking browser-like DOM
+ */
+global.document = jsdom('<!doctype html><html><body></body></html>', {
+  headers: {
+    'User-Agent':
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7)' +
+    ' AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24'
+  }
+});
+global.window = document.defaultView;
+global.navigator = global.window.navigator;
+```
+
+#### Hooks and specifics mocha features
+
+This addon now supports :
+
+  * beforeEach
+  * afterEach
+  * before
+  * after
+  * describe.only (no effect on storybook specs execution)
+  * describe.skip
+  * it.only (no effect on storybook specs execution)
+  * it.skip
+
+Please refer to mocha documentation to know how to use them.
+
+If you want to use that with storybook, you'll need to add them to your mocha config and storybook config files.
+You can find the complete configuration by looking at the [samples directory](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook)

@@ -9,7 +9,7 @@
     "storybook": "start-storybook -p 9001",
     "test": "echo \"Error: no test specified\" && exit 1",
     "jest": "jest",
-    "mocha": "mocha --compilers js:babel-register --require babel-polyfill -w ./.storybook/__conf__/mochaMockConfig.js \"./.storybook/**/*.stories.mocha.spec.js\""
+    "mocha": "mocha --compilers js:babel-register --require babel-polyfill ./.storybook/__conf__/mochaMockConfig.js \"./.storybook/**/*.mocha.stories.js\""
   },
   "repository": {
     "type": "git",

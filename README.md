@@ -13,10 +13,10 @@ This addon for storybook will allow you to write tests based on your stories and
 * [Getting Started](#getting-started)
 * [Use your stories with a test runner](#use-your-stories-with-a-test-runner)
   * [Using JEST](#using-jest)
-    * [Hooks and specifics jest features](hooks-and-specifics-jest-features)
+    * [Hooks and specifics jest features](#hooks-and-specifics-jest-features)
     * [Snapshot all your stories automatically](#snapshot-all-your-stories-automatically)
   * [Using Mocha](#using-mocha)
-    * [Hooks and specifics mocha features](hooks-and-specifics-mocha-features)
+    * [Hooks and specifics mocha features](#hooks-and-specifics-mocha-features)
 
 ## Getting Started
 

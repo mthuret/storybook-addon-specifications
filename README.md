@@ -290,22 +290,22 @@ that this sample needs to be adapt for your specific use-case. Please also note 
 in the sample directory of this repository, the mocha config file is a little bit more
 complexe in order to be able to use jsdom.
 
-If you need it, and don't use it already, you can add those line :
+>If you need it, and don't use it already, you can add those line :
 
-```js
-/**
- *Mocking browser-like DOM
- */
-global.document = jsdom('<!doctype html><html><body></body></html>', {
-  headers: {
-    'User-Agent':
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7)' +
-    ' AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24'
-  }
-});
-global.window = document.defaultView;
-global.navigator = global.window.navigator;
-```
+>```js
+>/**
+> *Mocking browser-like DOM
+> */
+>global.document = jsdom('<!doctype html><html><body></body></html>', {
+>  headers: {
+>    'User-Agent':
+>    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7)' +
+>    ' AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24'
+>  }
+>});
+>global.window = document.defaultView;
+>global.navigator = global.window.navigator;
+>```
 
 #### Hooks and specifics mocha features
 

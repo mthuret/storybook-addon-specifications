@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.mocks = exports.xdescribe = exports.fit = exports.xit = exports.before = exports.after = exports.afterEach = exports.beforeEach = exports.it = exports.describe = exports.specs = exports.register = exports.EVENT_ID = exports.PANEL_ID = exports.ADDON_ID = undefined;
 
 var _manager = require('./manager');
 
@@ -75,7 +76,16 @@ Object.defineProperty(exports, 'xdescribe', {
     return _preview.xdescribe;
   }
 });
+
+var _mocks2 = require('./mocks');
+
+var _mocks = _interopRequireWildcard(_mocks2);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 // addons, panels and events get unique names using a prefix
 var ADDON_ID = exports.ADDON_ID = 'storybook-addon-specifications';
 var PANEL_ID = exports.PANEL_ID = ADDON_ID + '/specifications-panel';
 var EVENT_ID = exports.EVENT_ID = ADDON_ID + '/specifications-event';
+
+exports.mocks = _mocks;

@@ -33,7 +33,7 @@ export const it = function (desc, func) {
     func();
     results[currentStory].goodResults.push(desc);
   } catch (e) {
-    console.error(`${currentStory} - ${desc} : ${e}`);
+    console.error(`${currentStory} - ${desc} : ${e}`, e.stack);
     results[currentStory].wrongResults.push({spec: desc, message: e.message});
   }
   if(afterEachFunc[currentStory]) afterEachFunc[currentStory]();

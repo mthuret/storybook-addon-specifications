@@ -107,28 +107,8 @@ export const it = itReal;
 Create a \_\_mocks\_\_ directory within .storybook and add also a facade.js file.
 
 ```js
-export const storiesOf = function storiesOf() {
-  var api = {};
-  api.add = (name, func)=> {
-    func();
-    return api;
-  };
-  api.addWithInfo = (name, func)=> {
-    func();
-    return api;
-  };
-  return api;
-};
-export const action = () => {};
-
-export const linkTo = () => {};
-
-export const specs = (spec) => {
-  spec();
-};
-
-export const describe = jasmine.currentEnv_.describe;
-export const it = jasmine.currentEnv_.it;
+const { mocks } = require('storybook-addon-specifications');
+module.exports = { ...mocks };
 ```
 
 Create or add to your jest config file the following line :
@@ -173,39 +153,11 @@ You can find the complete configuration by looking at the [samples directory](ht
 The only thing to do is to modify the facade.js mock file (the one used by jest) to look like this :
 
 ```js
-export const storiesOf = function storiesOf() {
-  var api = {};
-  var story;
-  api.add = (name, func)=> {
-    story = func();
-    snapshot(name, story);
-    return api;
-  };
-  api.addWithInfo = (name, func)=> {
-    story = func();
-    snapshot(name, story);
-    return api;
-  };
-  return api;
+const { mocks } = require('storybook-addon-specifications');
+module.exports = {
+ ...mocks,
+ storiesOf: mocks.snapshotStoriesOf,
 };
-export const action = () => {};
-
-export const linkTo = () => {};
-
-export const specs = (spec) => {
-  spec()
-};
-
-export const snapshot = (name, story) => {
-    it(name, function () {
-      let renderer = require("react-test-renderer");
-      const tree = renderer.create(story).toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-};
-
-export const describe = jasmine.currentEnv_.describe;
-export const it = jasmine.currentEnv_.it;
 ```
 
 Every story added to storybook, will now have a snapshot.
@@ -231,52 +183,27 @@ by redefining them globally (see step 3).
 2. Create wherever you want a new file that will mock the storybook api
 
 ```js
-export const storiesOf = function storiesOf() {
-  var api = {};
-  api.add = (name, func)=> {
-    func();
-    return api;
-  };
-  api.addWithInfo = (name, func)=> {
-    func();
-    return api;
-  };
-  return api;
-};
-export const action = () => {};
-
-export const linkTo = () => {};
-
-export const specs = (spec) => {
-  spec();
-};
-
-export const describe = describe;
-export const it = it;
+const { mocks } = require('storybook-addon-specifications');
+module.exports = { ...mocks };
 ```
 
 3. Then create or add those lines to a mocha config file :
 
 ```js
-import {storiesOf, action, linkTo, describe, it} from "path/to/your/mock/file";
+import {storiesOf, action, linkTo} from "path/to/your/mock/file";
 global.storiesOf = storiesOf;
 global.action = action;
 global.linkTo = linkTo;
-global.describe = describe;
-global.it = it;
 ```
 
 4. And also those lines to the storybook config file
 
 ```js
-import {storiesOf, action, linkTo, specs, describe, it} from "./facade";
-
+import {storiesOf, action, linkTo, specs} from "./facade";
 global.storiesOf = storiesOf;
 global.action = action;
 global.linkTo = linkTo;
 global.specs = specs;
-global.describe = describe;
-global.it = it;
 ```
 
 Finally add this to your mocha running script

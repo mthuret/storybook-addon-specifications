@@ -1,13 +1,20 @@
 exports[`test Hello Earth 1`] = `
 <button
-  onClick={undefined}>
+  onClick={[Function NO_FUNC]}>
   Hello Earth
 </button>
 `;
 
 exports[`test Hello World 1`] = `
 <button
-  onClick={undefined}>
+  onClick={[Function NO_FUNC]}>
+  Hello World
+</button>
+`;
+
+exports[`test Hello World Streamlined 1`] = `
+<button
+  onClick={[Function NO_FUNC]}>
   Hello World
 </button>
 `;

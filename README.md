@@ -51,12 +51,12 @@ stories.add('Hello World', function () {
       Hello World
     </button>;
 
-  specs(() => describe('Hello World', function () {
+  describe('Hello World', function () {
     it('Should have the Hello World label', function () {
       let output = mount(story);
       expect(output.text()).toContain('Hello World');
     });
-  }));
+  });
 
   return story;
 });
@@ -64,15 +64,19 @@ stories.add('Hello World', function () {
 
 > Note : if you use enzyme, you will need to add the following lines to your webpack.config.js file. You also needs to add the **json library** to your dev dependencies.
 
->```
->externals: {
->    'jsdom': 'window',
->    'cheerio': 'window',
->    'react/lib/ExecutionEnvironment': true,
->    'react/lib/ReactContext': 'window',
->    'react/addons': true,
->  }
->```
+```js
+const specs = require('storybook-addon-specifications/dist/webpack.config');
+
+module.exports = {
+  < your config >
+  module: {
+    loaders: [
+      specs.testMethodLoader,
+    ],
+  },
+  externals: spec.externals,
+}
+```
 
 You can use `beforeEach, before, after and afterEach` functions to mutualize or clean up some stuff.
 
@@ -83,7 +87,7 @@ Writing tests directly next to the component declaration used for the story is a
 To do that, the idea is to add to the test runner, all the files used for declaring stories.
 But because this addon redefine describe and it functions, you'll need some extra-configuration to make the tests pass within the test runner.
 
-This repository has a [directory full of examples](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook) where you can find everything that is describe here. 
+This repository has a [directory full of examples](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook) where you can find everything that is describe here.
 
 ### Using JEST
 
@@ -107,28 +111,8 @@ export const it = itReal;
 Create a \_\_mocks\_\_ directory within .storybook and add also a facade.js file.
 
 ```js
-export const storiesOf = function storiesOf() {
-  var api = {};
-  api.add = (name, func)=> {
-    func();
-    return api;
-  };
-  api.addWithInfo = (name, func)=> {
-    func();
-    return api;
-  };
-  return api;
-};
-export const action = () => {};
-
-export const linkTo = () => {};
-
-export const specs = (spec) => {
-  spec();
-};
-
-export const describe = jasmine.currentEnv_.describe;
-export const it = jasmine.currentEnv_.it;
+const { mocks } = require('storybook-addon-specifications');
+module.exports = { ...mocks };
 ```
 
 Create or add to your jest config file the following line :
@@ -173,39 +157,11 @@ You can find the complete configuration by looking at the [samples directory](ht
 The only thing to do is to modify the facade.js mock file (the one used by jest) to look like this :
 
 ```js
-export const storiesOf = function storiesOf() {
-  var api = {};
-  var story;
-  api.add = (name, func)=> {
-    story = func();
-    snapshot(name, story);
-    return api;
-  };
-  api.addWithInfo = (name, func)=> {
-    story = func();
-    snapshot(name, story);
-    return api;
-  };
-  return api;
+const { mocks } = require('storybook-addon-specifications');
+module.exports = {
+ ...mocks,
+ storiesOf: mocks.snapshotStoriesOf,
 };
-export const action = () => {};
-
-export const linkTo = () => {};
-
-export const specs = (spec) => {
-  spec()
-};
-
-export const snapshot = (name, story) => {
-    it(name, function () {
-      let renderer = require("react-test-renderer");
-      const tree = renderer.create(story).toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-};
-
-export const describe = jasmine.currentEnv_.describe;
-export const it = jasmine.currentEnv_.it;
 ```
 
 Every story added to storybook, will now have a snapshot.
@@ -217,7 +173,7 @@ If for any reason you want to choose when to snapshot a story, that's also possi
 ```js
 export const snapshot = () => {};
 ```
-When storybook is going to run, it will do nothing with the snapshot function. 
+When storybook is going to run, it will do nothing with the snapshot function.
 
 ### Using Mocha
 
@@ -231,52 +187,27 @@ by redefining them globally (see step 3).
 2. Create wherever you want a new file that will mock the storybook api
 
 ```js
-export const storiesOf = function storiesOf() {
-  var api = {};
-  api.add = (name, func)=> {
-    func();
-    return api;
-  };
-  api.addWithInfo = (name, func)=> {
-    func();
-    return api;
-  };
-  return api;
-};
-export const action = () => {};
-
-export const linkTo = () => {};
-
-export const specs = (spec) => {
-  spec();
-};
-
-export const describe = describe;
-export const it = it;
+const { mocks } = require('storybook-addon-specifications');
+module.exports = { ...mocks };
 ```
 
 3. Then create or add those lines to a mocha config file :
 
 ```js
-import {storiesOf, action, linkTo, describe, it} from "path/to/your/mock/file";
+import {storiesOf, action, linkTo} from "path/to/your/mock/file";
 global.storiesOf = storiesOf;
 global.action = action;
 global.linkTo = linkTo;
-global.describe = describe;
-global.it = it;
 ```
 
 4. And also those lines to the storybook config file
 
 ```js
-import {storiesOf, action, linkTo, specs, describe, it} from "./facade";
-
+import {storiesOf, action, linkTo, specs} from "./facade";
 global.storiesOf = storiesOf;
 global.action = action;
 global.linkTo = linkTo;
 global.specs = specs;
-global.describe = describe;
-global.it = it;
 ```
 
 Finally add this to your mocha running script

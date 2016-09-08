@@ -21,9 +21,7 @@ var afterFunc = {};
 var afterEachFunc = {};
 
 function specs(specs) {
-  var storyName = specs();
-  var channel = _storybookAddons2.default.getChannel();
-  channel.emit(_.EVENT_ID, { results: results[storyName] });
+  // Do nothing, keep this function around for back-compat
 }
 
 var describe = exports.describe = function describe(storyName, func) {
@@ -37,6 +35,8 @@ var describe = exports.describe = function describe(storyName, func) {
 
   if (afterFunc[currentStory]) afterFunc[currentStory]();
 
+  var channel = _storybookAddons2.default.getChannel();
+  channel.emit(_.EVENT_ID, { results: results[storyName] });
   return storyName;
 };
 
@@ -46,7 +46,7 @@ var it = exports.it = function it(desc, func) {
     func();
     results[currentStory].goodResults.push(desc);
   } catch (e) {
-    console.error(currentStory + ' - ' + desc + ' : ' + e);
+    console.error(currentStory + ' - ' + desc + ' : ' + e, e.stack);
     results[currentStory].wrongResults.push({ spec: desc, message: e.message });
   }
   if (afterEachFunc[currentStory]) afterEachFunc[currentStory]();

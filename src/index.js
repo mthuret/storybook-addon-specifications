@@ -7,3 +7,4 @@ export { register } from './manager';
 export { specs, describe, it,
   beforeEach, afterEach, after, before,
 xit, fit, xdescribe} from './preview';
+export * as mocks from './mocks';

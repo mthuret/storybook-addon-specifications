@@ -108,7 +108,7 @@ Create a \_\_mocks\_\_ directory within .storybook and add also a facade.js file
 
 ```js
 export const storiesOf = function storiesOf() {
-  var api = {};
+  const api = {};
   api.add = (name, func)=> {
     func();
     return api;
@@ -119,7 +119,7 @@ export const storiesOf = function storiesOf() {
   };
   return api;
 };
-export const action = () => {};
+export const action = () => {() => {}};
 
 export const linkTo = () => {};
 

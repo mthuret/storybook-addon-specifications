@@ -1,5 +1,5 @@
 const path = require('path');
-
+const specs = require("../dist/webpack.config");
 const config = {
   module: {
     loaders: [
@@ -12,16 +12,16 @@ const config = {
         test: /\.json?$/,
         loaders: ['json'],
         include: path.resolve(__dirname, '../'),
-      }
+      },
+      specs.testMethodLoader,
     ],
   },
-  externals: {
-    'jsdom': 'window',
-    'cheerio': 'window',
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': 'window',
-    'react/addons': true,
-  }
+  resolve: {
+    alias: {
+      'storybook-addon-specifications': path.join(__dirname, '../dist'),
+    },
+  },
+  externals: specs.externals,
 };
 
 module.exports = config;

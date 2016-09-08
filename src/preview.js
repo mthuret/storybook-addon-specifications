@@ -9,6 +9,7 @@ const afterEachFunc = {};
 
 export function specs(specs) {
   // Do nothing, keep this function around for back-compat
+  specs();
 }
 
 export const describe = (storyName, func) => {

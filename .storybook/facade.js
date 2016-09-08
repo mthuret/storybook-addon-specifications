@@ -1,26 +1,18 @@
-import {storiesOf as storiesOfReal,
-    action as actionReal,
-linkTo as linkToReal} from "@kadira/storybook"
-import { specs as specsReal, describe as describeReal,
-  it as itReal, beforeEach as beforeEachReal,
-before as beforeReal, after as afterReal,
-afterEach as afterEachReal,
-xit as xitReal,
-fit as fitReal,
-xdescribe as xdescribeReal} from '../src'
+if (!global['storiesOf']) {
+  var {
+    storiesOf: storiesOfReal,
+    action: actionReal,
+    linkTo: linkToReal,
+  } = require("@kadira/storybook");
+}
 
-export const storiesOf = storiesOfReal;
-export const action = actionReal;
-export const linkTo = linkToReal;
-export const specs = specsReal;
-export const describe = describeReal;
-export const it = itReal;
+if (!global['specs']) {
+  var {
+    specs: specsReal,
+  } = require('../dist');
+}
 
-export const beforeEach = beforeEachReal;
-export const afterEach = afterEachReal;
-export const before = beforeReal;
-export const after = afterReal;
-
-export const xit = xitReal;
-export const fit = fitReal;
-export const xdescribe = xdescribeReal;
+export const storiesOf = global['storiesOf'] || storiesOfReal;
+export const action = global['action'] || actionReal;
+export const linkTo = global['linkTo'] || linkToReal;
+export const specs = global['specs'] || specsReal;

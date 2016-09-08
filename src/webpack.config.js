@@ -19,6 +19,10 @@ export const externals = {
   'react/addons': true,
 };
 
+methods.forEach(m => externals[m] = true);
+
+console.log("EXTERNALS", externals);
+
 export const testMethodLoader = {
   test: require.resolve('./'),
   loader: `expose-members?${methods.join(',')}`,

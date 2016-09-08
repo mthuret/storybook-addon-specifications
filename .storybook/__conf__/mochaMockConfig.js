@@ -1,4 +1,4 @@
-import {storiesOf, action, linkTo, specs} from "../__mocks__/facade-mocha";
+const {storiesOf, action, linkTo, specs} = require("../../dist/mocks");
 global.storiesOf = storiesOf;
 global.action = action;
 global.linkTo = linkTo;

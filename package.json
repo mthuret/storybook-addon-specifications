@@ -4,10 +4,11 @@
   "description": "Add tests to your react storybook stories",
   "main": "dist/index.js",
   "scripts": {
+    "clean": "rimraf dist",
     "deploy-storybook": "storybook-to-ghpages",
-    "prepublish": "node .scripts/npm-prepublish.js",
+    "prepublish": "npm-run-all clean test",
     "storybook": "start-storybook -p 9001",
-    "babel": "babel src --out-dir dist",
+    "babel": "babel --ignore __tests__ src --out-dir dist",
     "jest": "jest",
     "mocha": "mocha --compilers js:babel-register --require babel-polyfill ./.storybook/__conf__/mochaMockConfig.js \"./.storybook/**/*.mocha.stories.js\"",
     "test": "npm-run-all babel jest mocha"
@@ -46,7 +47,7 @@
     "react-addons-test-utils": "^0.14.7 || ^15.0.0",
     "react-dom": "^15.3.0",
     "react-test-renderer": "^15.3.1",
-    "shelljs": "^0.7.3"
+    "rimraf": "^2.5.4"
   },
   "dependencies": {
     "aphrodite": "^0.5.0"

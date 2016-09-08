@@ -1,3 +1,5 @@
 node_modules
 .babelrc
 .idea
+src
+.storybook

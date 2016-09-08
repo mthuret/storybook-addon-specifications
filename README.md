@@ -51,12 +51,12 @@ stories.add('Hello World', function () {
       Hello World
     </button>;
 
-  specs(() => describe('Hello World', function () {
+  describe('Hello World', function () {
     it('Should have the Hello World label', function () {
       let output = mount(story);
       expect(output.text()).toContain('Hello World');
     });
-  }));
+  });
 
   return story;
 });
@@ -83,7 +83,7 @@ Writing tests directly next to the component declaration used for the story is a
 To do that, the idea is to add to the test runner, all the files used for declaring stories.
 But because this addon redefine describe and it functions, you'll need some extra-configuration to make the tests pass within the test runner.
 
-This repository has a [directory full of examples](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook) where you can find everything that is describe here. 
+This repository has a [directory full of examples](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook) where you can find everything that is describe here.
 
 ### Using JEST
 
@@ -217,7 +217,7 @@ If for any reason you want to choose when to snapshot a story, that's also possi
 ```js
 export const snapshot = () => {};
 ```
-When storybook is going to run, it will do nothing with the snapshot function. 
+When storybook is going to run, it will do nothing with the snapshot function.
 
 ### Using Mocha
 

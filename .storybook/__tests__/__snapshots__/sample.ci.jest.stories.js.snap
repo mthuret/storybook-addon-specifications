@@ -11,3 +11,10 @@ exports[`test Hello World 1`] = `
   Hello World
 </button>
 `;
+
+exports[`test Hello World Streamlined 1`] = `
+<button
+  onClick={undefined}>
+  Hello World
+</button>
+`;

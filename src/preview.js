@@ -8,9 +8,7 @@ const afterFunc = {};
 const afterEachFunc = {};
 
 export function specs(specs) {
-  let storyName = specs();
-  const channel = addons.getChannel();
-  channel.emit(EVENT_ID, {results : results[storyName]});
+  // Do nothing, keep this function around for back-compat
 }
 
 export const describe = (storyName, func) => {
@@ -24,6 +22,8 @@ export const describe = (storyName, func) => {
 
   if(afterFunc[currentStory]) afterFunc[currentStory]();
 
+  const channel = addons.getChannel();
+  channel.emit(EVENT_ID, {results : results[storyName]});
   return storyName;
 };
 

@@ -37,6 +37,36 @@ stories.add('Hello World', function () {
   return helloWorldStory;
 });
 
+stories.add('Hello World Streamlined', function () {
+  const helloWorldStory =
+    <button onClick={action('Hello World')}>
+      Hello World
+    </button>;
+
+  describe('Hello World Streamlined', function () {
+    let output;
+    beforeEach(function() {
+      console.log('BEFORE EACH');
+      output = mount(helloWorldStory);
+    });
+
+    afterEach(function() {
+      console.log('AFTER EACH');
+    });
+
+    it('Should have the Hello World label', function () {
+      expect(output.text()).toContain('Hello World');
+    });
+
+    it('Should have the Hello World label', function () {
+      expect(output.text()).toContain('Hello World');
+    });
+  });
+
+  return helloWorldStory;
+});
+
+
 stories.add('Hello Earth', function () {
   const helloEarthStory =
     <button onClick={action('Hello Earth')}>

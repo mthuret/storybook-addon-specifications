@@ -174,21 +174,21 @@ The only thing to do is to modify the facade.js mock file (the one used by jest)
 
 ```js
 export const storiesOf = function storiesOf() {
-  var api = {};
+  const api = {};
   var story;
   api.add = (name, func)=> {
     story = func();
     snapshot(name, story);
     return api;
   };
-  api.addWithInfo = (name, func)=> {
+  api.addWithInfo = (name, func) => {
     story = func();
     snapshot(name, story);
     return api;
   };
   return api;
 };
-export const action = () => {};
+export const action = () => {() => {}};
 
 export const linkTo = () => {};
 
@@ -232,7 +232,7 @@ by redefining them globally (see step 3).
 
 ```js
 export const storiesOf = function storiesOf() {
-  var api = {};
+  const api = {};
   api.add = (name, func)=> {
     func();
     return api;
@@ -243,7 +243,7 @@ export const storiesOf = function storiesOf() {
   };
   return api;
 };
-export const action = () => {};
+export const action = () => {() => {}};
 
 export const linkTo = () => {};
 

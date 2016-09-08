@@ -64,15 +64,19 @@ stories.add('Hello World', function () {
 
 > Note : if you use enzyme, you will need to add the following lines to your webpack.config.js file. You also needs to add the **json library** to your dev dependencies.
 
->```
->externals: {
->    'jsdom': 'window',
->    'cheerio': 'window',
->    'react/lib/ExecutionEnvironment': true,
->    'react/lib/ReactContext': 'window',
->    'react/addons': true,
->  }
->```
+```js
+const specs = require('storybook-addon-specifications/dist/webpack.config');
+
+module.exports = {
+  < your config >
+  module: {
+    loaders: [
+      specs.testMethodLoader,
+    ],
+  },
+  externals: spec.externals,
+}
+```
 
 You can use `beforeEach, before, after and afterEach` functions to mutualize or clean up some stuff.
 

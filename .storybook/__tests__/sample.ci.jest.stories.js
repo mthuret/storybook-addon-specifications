@@ -1,7 +1,5 @@
 import React from "react";
-import {storiesOf, action, describe, it, specs,
-beforeEach, before, after, afterEach, xdescribe,
-fit, xit} from "../facade";
+import {storiesOf, action, specs} from "../facade";
 import {mount} from "enzyme";
 import expect from "expect";
 

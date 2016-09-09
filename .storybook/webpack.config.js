@@ -17,9 +17,7 @@ const config = {
     ],
   },
   resolve: {
-    alias: {
-      'storybook-addon-specifications': path.join(__dirname, '../dist'),
-    },
+    alias: specs.resolve.alias,
   },
   externals: specs.externals,
 };

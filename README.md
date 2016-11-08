@@ -12,7 +12,7 @@ This addon for storybook will allow you to write tests based on your stories and
 
 * [Getting Started](#getting-started)
 * [Use your stories with a test runner](#use-your-stories-with-a-test-runner)
-  * [Using JEST](#using-jest)
+  * [Using Jest](#using-jest)
     * [Hooks and specifics jest features](#hooks-and-specifics-jest-features)
     * [Snapshot all your stories automatically](#snapshot-all-your-stories-automatically)
   * [Using Mocha](#using-mocha)
@@ -32,7 +32,7 @@ Add this line to your `addons.js` file (create this file inside your storybook c
 import 'storybook-addon-specifications/register';
 ```
 
-Import the `specs, describe and it` functions and use it to write your tests. This example uses *enzyme* and *expect* to perform the testing.
+Import the `specs`, `describe` and `it` functions and use it to write your tests. This example uses *enzyme* and *expect* to perform the testing.
 
 The first parameter of the describe function **must be the same** as the story's name.
 
@@ -62,7 +62,7 @@ stories.add('Hello World', function () {
 });
 ```
 
-> Note : if you use enzyme, you will need to add the following lines to your webpack.config.js file. You also needs to add the **json library** to your dev dependencies.
+> Note : if you use enzyme, you will need to add the following lines to your webpack.config.js file. You also need to add the **json library** to your dev dependencies.
 
 >```
 >externals: {
@@ -74,7 +74,7 @@ stories.add('Hello World', function () {
 >  }
 >```
 
-You can use `beforeEach, before, after and afterEach` functions to mutualize or clean up some stuff.
+You can use `beforeEach`, `before`, `after` and `afterEach` functions to mutualize or clean up some stuff.
 
 ## Use your stories with a test runner
 
@@ -85,9 +85,9 @@ But because this addon redefine describe and it functions, you'll need some extr
 
 This repository has a [directory full of examples](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook) where you can find everything that is describe here. 
 
-### Using JEST
+### Using Jest
 
-You can use the mocking functionality of jest to switch between the real describe and it implementation of jest or
+You can use the mocking functionality of Jest to switch between the real describe and its implementation of Jest or
 the one for this addon.
 
 Inside .storybook, add a facade.js file with the following content :
@@ -131,7 +131,7 @@ export const describe = jasmine.currentEnv_.describe;
 export const it = jasmine.currentEnv_.it;
 ```
 
-Create or add to your jest config file the following line :
+Create or add to your Jest config file the following line :
 
 ```js
 jest.mock('./.storybook/facade');
@@ -139,7 +139,7 @@ jest.mock('./.storybook/facade');
 
 > **Inside your stories file you must now use the .storybook/facade.js file for imports**.
 
-Finally add this to your jest configuration :
+Finally add this to your Jest configuration :
 
 ```js
 "jest":{
@@ -159,18 +159,18 @@ This addon now supports :
   * xit
   * xdescribe
 
-Please refer to jest documentation to know how to use them.
+Please refer to Jest documentation to know how to use them.
 
 If you want to use that with storybook, you'll need to add them to your facade and facade-mock files.
 You can find the complete configuration by looking at the [samples directory](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook)
 
 #### Snapshot all your stories automatically
 
->**Warning :** This part will describe how to add automatically jest snapshot to every story you write. It will allow you to take advantage of this jest feature but will not have any effect inside storybook. Indeed, you don't even need to add this addon to your project if you don't plan to use the specs() function. If I describe the idea here, it's only because it uses the trick I explained before allowing you to write tests inside stories and still be able to execute them with a test runner.
+>**Warning :** This part will describe how to automatically add Jest snapshots to every story you write. It will allow you to take advantage of this Jest feature but will not have any effect inside storybook. Indeed, you don't even need to add this addon to your project if you don't plan to use the specs() function. If I describe the idea here, it's only because it uses the trick I explained before allowing you to write tests inside stories and still be able to execute them with a test runner.
 
 ![](docs/snapshot-jest.png)
 
-The only thing to do is to modify the facade.js mock file (the one used by jest) to look like this :
+The only thing to do is to modify the facade.js mock file (the one used by Jest) to look like this :
 
 ```js
 export const storiesOf = function storiesOf() {
@@ -286,7 +286,7 @@ Finally add this to your mocha running script
 ```
 
 > **Warning** : if you already have some specific configuration for mocha, please note
-that this sample needs to be adapt for your specific use-case. Please also note that
+that this sample needs to be adapted for your specific use-case. Please also note that
 in the sample directory of this repository, the mocha config file is a little bit more
 complexe in order to be able to use jsdom.
 

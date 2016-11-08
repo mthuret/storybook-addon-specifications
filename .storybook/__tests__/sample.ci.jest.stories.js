@@ -1,11 +1,7 @@
 import React from "react";
-import {storiesOf, action, describe, it, specs,
-beforeEach, before, after, afterEach, xdescribe,
-fit, xit} from "../facade";
+import {storiesOf, action, specs} from "../facade";
 import {mount} from "enzyme";
 import expect from "expect";
-
-
 const stories = storiesOf('Button - CI JEST Sample', module);
 
 stories.add('Hello World', function () {
@@ -14,7 +10,7 @@ stories.add('Hello World', function () {
       Hello World
     </button>;
 
-  specs(() => describe('Hello World', function () {
+  describe('Hello World Streamlined', function () {
     let output;
     beforeEach(function() {
       console.log('BEFORE EACH');
@@ -32,10 +28,11 @@ stories.add('Hello World', function () {
     it('Should have the Hello World label', function () {
       expect(output.text()).toContain('Hello World');
     });
+  });
 
-  }));
   return helloWorldStory;
 });
+
 
 stories.add('Hello Earth', function () {
   const helloEarthStory =

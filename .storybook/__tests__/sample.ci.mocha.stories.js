@@ -1,7 +1,7 @@
 import React from "react";
+import {storiesOf, action, specs} from "../facade";
 import {mount} from "enzyme";
 import expect from "expect";
-
 const stories = storiesOf('Button - CI MOCHA Sample', module);
 
 stories.add('Hello World', function () {
@@ -10,7 +10,7 @@ stories.add('Hello World', function () {
       Hello World
     </button>;
 
-  specs(() => describe('Hello World', function () {
+  describe('Hello World', function () {
     let output;
     beforeEach(function() {
       console.log('BEFORE EACH');
@@ -36,8 +36,7 @@ stories.add('Hello World', function () {
     it('Should have the Hello World label', function () {
       expect(output.text()).toContain('Hello World');
     });
-
-  }));
+  });
   return helloWorldStory;
 });
 

@@ -324,3 +324,47 @@ Please refer to mocha documentation to know how to use them.
 
 If you want to use that with storybook, you'll need to add them to your mocha config and storybook config files.
 You can find the complete configuration by looking at the [samples directory](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook)
+
+#### Loading External Test Files
+
+It is also possible to load your test files externally from their respective test files.
+
+```
+|- example.stories.js
+|- example.test.js
+|- example.js
+```
+
+This allows us to run both our test runner, and view the test results inside of React Storybook.
+
+```js
+import React from 'react'
+import { storiesOf } from '@kadira/storybook'
+import { specs } from 'storybook-addon-specifications'
+
+import { tests } from './Example.test'
+import Example from './example'
+
+storiesOf('Example', module)
+  .add('Default', () => {
+  
+    // tests are loaded here
+    specs(() => tests)
+    
+    return <Example />
+  })
+```
+
+We must first override the Jest describe/it/expect blocks to use the storybook-addon-spec's implementation. 
+Add the following to your storybook config file. 
+
+/.storybook/config.js
+
+```js
+import { describe, it } from 'storybook-addon-specifications'
+import expect from 'expect'
+
+window.describe = describe
+window.it = it
+window.expect = expect
+```

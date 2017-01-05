@@ -1,0 +1,13 @@
+language: node_js
+node_js: stable
+install:
+  - npm install --global yarn
+  - yarn
+branches:
+  only:
+    - master
+    - /^greenkeeper-.*$/
+cache:
+  directories:
+  - ~/.yarn
+  - ~/.nvm

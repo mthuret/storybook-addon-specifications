@@ -26,7 +26,7 @@ stories.add('Hello World', function () {
     });
 
     it('Should have the Hello World label', function () {
-      expect(output.text()).toContain('Hello World');
+      expect(output.text()).toContain('Hllo World');
     });
 
     it('Should have the Hello World label', function () {

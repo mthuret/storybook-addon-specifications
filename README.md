@@ -17,6 +17,7 @@ This addon for storybook will allow you to write tests based on your stories and
     * [Snapshot all your stories automatically](#snapshot-all-your-stories-automatically)
   * [Using Mocha](#using-mocha)
     * [Hooks and specifics mocha features](#hooks-and-specifics-mocha-features)
+* [Loading External Test Files](#loading-external-test-files)
 
 ## Getting Started
 

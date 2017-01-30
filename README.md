@@ -11,13 +11,15 @@ This addon for storybook will allow you to write tests based on your stories and
 ## Table of contents
 
 * [Getting Started](#getting-started)
-* [Use your stories with a test runner](#use-your-stories-with-a-test-runner)
-  * [Using Jest](#using-jest)
-    * [Hooks and specifics jest features](#hooks-and-specifics-jest-features)
-    * [Snapshot all your stories automatically](#snapshot-all-your-stories-automatically)
-  * [Using Mocha](#using-mocha)
-    * [Hooks and specifics mocha features](#hooks-and-specifics-mocha-features)
-* [Loading External Test Files](#loading-external-test-files)
+* [Add browser-side tests to your stories](#add-browser-side-tests-to-your-stories)
+  * [Use your stories with a test runner](#use-your-stories-with-a-test-runner)
+    * [Using Jest](#using-jest)
+      * [Hooks and specifics jest features](#hooks-and-specifics-jest-features)
+      * [Snapshot all your stories automatically](#snapshot-all-your-stories-automatically)
+    * [Using Mocha](#using-mocha)
+      * [Hooks and specifics mocha features](#hooks-and-specifics-mocha-features)
+  * [Loading External Test Files](#loading-external-test-files)
+* [Add server-side tests using jest to your stories](#add-server-side-tests-using-jest-to-your-stories)
 
 ## Getting Started
 
@@ -32,6 +34,8 @@ Add this line to your `addons.js` file (create this file inside your storybook c
 ```js
 import 'storybook-addon-specifications/register';
 ```
+
+#Add browser-side tests to your stories
 
 Import the `specs`, `describe` and `it` functions and use it to write your tests. This example uses *enzyme* and *expect* to perform the testing.
 
@@ -368,4 +372,36 @@ import expect from 'expect'
 window.describe = describe
 window.it = it
 window.expect = expect
+```
+
+#Add server-side tests using jest to your stories
+
+If your stories are not pure UI components, you might want to perform some advance testing using jest, to use the ability to mock module for 
+example. 
+
+1. Add the middleware
+
+Create the file `middleware.js` inside your storybook directory.
+
+Add the following lines: 
+
+```js
+
+``
+
+If you have a file `ComponentA.stories.js` that contain two story `story1` and `story2` then you will need to have the following jest test file:
+
+```js
+describe('ComponentA', () => {
+  describe('story1',  () => {
+    it('spec1', () => {
+
+    })
+  })
+  describe('story2',  () => {
+    it('spec2', () => {
+      
+    })
+  })
+})
 ```

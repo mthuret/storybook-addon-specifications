@@ -259,10 +259,11 @@ export const it = it;
 3. Then create or add those lines to a mocha config file :
 
 ```js
-import {storiesOf, action, linkTo, describe, it} from "path/to/your/mock/file";
+import {storiesOf, action, linkTo, specs, describe, it} from "path/to/your/mock/file";
 global.storiesOf = storiesOf;
 global.action = action;
 global.linkTo = linkTo;
+global.specs = specs;
 global.describe = describe;
 global.it = it;
 ```

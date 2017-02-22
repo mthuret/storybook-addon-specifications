@@ -42,7 +42,7 @@
     "jest": "^17.0.3",
     "json": "^9.0.4",
     "mocha": "^3.0.2",
-    "npm-run-all": "^3.1.0",
+    "npm-run-all": "^4.0.2",
     "react": "^15.3.0",
     "react-addons-test-utils": "^0.14.7 || ^15.0.0",
     "react-dom": "^15.3.0",

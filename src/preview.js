@@ -90,15 +90,9 @@ it.skip = function (desc, func) {
 };
 
 describe.only = function (storyName, func) {
-  currentStory = storyName;
-  results[currentStory] = {
-    goodResults: [],
-    wrongResults: []
-  };
+  return describe(storyName, func)
+};
 
-  func();
-
-  if(afterFunc[currentStory]) afterFunc[currentStory]();
-
-  return storyName;
+export const fdescribe = function (storyName, func) {
+  return describe(storyName, func)
 };

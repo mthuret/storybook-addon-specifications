@@ -5,7 +5,8 @@ import {
 } from "@kadira/storybook"
 import {jest} from '../../src'
 
-const stories = storiesOf('HelloWorld', module).addDecorator(jest);
+const stories = storiesOf('HelloWorld', module)
+// .addDecorator(jest);
 
 const HELLO_WORLD = <button onClick = {action('Hello World')}>Hello World</button>
 

@@ -11,6 +11,12 @@ export default class Specifications extends Component {
   }
 
   componentDidMount() {
+    fetch('/test').then(()=> {
+      const socket = new WebSocket('ws://localhost:9002');
+      socket.addEventListener('open', () => {
+        socket.send("Here's some text that the server is urgently awaiting!");
+      });
+    })
     this.props.channel.on(EVENT_ID, this._listener);
     this.props.api.onStory((data) => {
       this.setState({ results: { wrongResults: [], goodResults: [] } });

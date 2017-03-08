@@ -1,31 +1,38 @@
 const ipc = require('node-ipc');
 
 let buffer = [];
-let process = () => {
-  // console.log('buffer', buffer);
+let enabled = false;
+
+const server = 'storybook-specifications-middleware';
+
+const process = (results) => {
+  buffer = buffer.concat([results]);
+
+  if (enabled && buffer.length) {
+    buffer.map(result => {
+      ipc.of[server].emit('testResults', result);
+    });
+    buffer = [];
+  }
+
+  return results;
 };
 
-ipc.config.id = 'a-unique-process-name2';
+const enable = () => {
+  enabled = true;
+  ipc.of[server].emit('status', "Connected");
+}
+const disable = () => {
+  enabled = true;
+  ipc.of[server].emit('status', "Disconnected");
+}
+
+ipc.config.id = 'jest-recorder';
 ipc.config.retry = 1500;
 ipc.config.silent = true;
-ipc.connectTo('a-unique-process-name1', () => {
-  ipc.of['a-unique-process-name1'].on('connect', () => {
-    ipc.of['a-unique-process-name1'].emit('a-unique-message-name', "Connected");
-    process = () => {
-      // console.log('processing', buffer);
-      buffer.map(result => {
-        ipc.of['a-unique-process-name1'].emit('a-unique-message-name', result);
-      });
-      buffer = [];
-    };
-    process();
-  });
+ipc.connectTo(server, () => {
+  ipc.of[server].on('connect', enable);
+  ipc.of[server].on('disconnect', disable);
 });
 
-module.exports = (results) => {
-  // ipc.log(results);
-  buffer = buffer.concat([results]);
-  // ipc.log(buffer);
-  process();
-  return results;
-}
+module.exports = process;

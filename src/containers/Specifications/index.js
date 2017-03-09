@@ -16,9 +16,14 @@ export default class Specifications extends Component {
       socket.addEventListener('open', () => {
         socket.send("Here's some text that the server is urgently awaiting!");
       });
+      socket.addEventListener('message', (event) => {
+        const data = JSON.parse(event.data);
+        console.log('MESSAGE', data);
+      });
     })
     this.props.channel.on(EVENT_ID, this._listener);
-    this.props.api.onStory((data) => {
+    this.props.api.onStory((...data) => {
+      console.log(data);
       this.setState({ results: { wrongResults: [], goodResults: [] } });
     });
   }

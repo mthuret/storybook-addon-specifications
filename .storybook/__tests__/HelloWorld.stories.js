@@ -3,10 +3,10 @@ import {
   storiesOf,
   action
 } from "@kadira/storybook"
-import {jest} from '../../src'
+import { metadata } from '../../src'
 
 const stories = storiesOf('HelloWorld', module)
-// .addDecorator(jest);
+  .addDecorator(metadata({ module, __dirname, __filename }));
 
 const HELLO_WORLD = <button onClick = {action('Hello World')}>Hello World</button>
 

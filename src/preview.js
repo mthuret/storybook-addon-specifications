@@ -45,6 +45,13 @@ export function jest(story, context) {
   return <span>{story()}</span>
 }
 
+export function metadata(file) {
+  return (story, context) => {
+    console.log(file, story, context);
+    return story();
+  }
+}
+
 function separateMessageFromStack(content) {
   if (!content) {
     return {message: '', stack: ''};

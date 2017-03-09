@@ -4,6 +4,6 @@ export const PANEL_ID = `${ADDON_ID}/specifications-panel`;
 export const EVENT_ID = `${ADDON_ID}/specifications-event`;
 
 export { register } from './manager';
-export { specs, jest, describe, it,
+export { specs, jest, describe, it, metadata,
   beforeEach, afterEach, after, before,
 xit, fit, xdescribe} from './preview';

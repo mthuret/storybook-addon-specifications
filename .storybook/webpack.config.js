@@ -21,6 +21,10 @@ const config = {
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': 'window',
     'react/addons': true,
+  },
+  node: {
+    __dirname: true,
+    __filename: true
   }
 };
 

@@ -295,9 +295,13 @@ complexe in order to be able to use jsdom.
 >If you need it, and don't use it already, you can add those line :
 
 >```js
+> // choose one of the following
+> import { jsdom } from 'jsdom'; // older versions of JSDOM
+> import { JSDOM } from 'jsdom'; // newer version 
 >/**
 > *Mocking browser-like DOM
 > */
+>// old jsdom
 >global.document = jsdom('<!doctype html><html><body></body></html>', {
 >  headers: {
 >    'User-Agent':
@@ -305,6 +309,38 @@ complexe in order to be able to use jsdom.
 >    ' AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24'
 >  }
 >});
+// new version
+>global.document = (new JSDOM('<!doctype html><html><body></body></html>', {
+324
+>  headers: {
+325
+>    'User-Agent':
+326
+>    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7)' +
+327
+>    ' AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24'
+328
+>  }
+329
+>})).window.document;
+>global.window = document.defaultView;
+>global.navigator = global.window.navigator;
+>```
+
+or if you are a newer version of jsdom 
+
+>```js
+>/**
+> *Mocking browser-like DOM
+> */
+>import { JSDOM } from 'jsdom';
+>global.document = (new JSDOM('<!doctype html><html><body></body></html>', {
+>  headers: {
+>    'User-Agent':
+>    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7)' +
+>    ' AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.71 Safari/534.24'
+>  }
+>})).window.document;
 >global.window = document.defaultView;
 >global.navigator = global.window.navigator;
 >```

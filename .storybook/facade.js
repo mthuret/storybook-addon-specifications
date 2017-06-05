@@ -2,7 +2,7 @@ import {
     storiesOf as storiesOfReal,
     action as actionReal,
     linkTo as linkToReal
-} from '@storybook/react';
+} from "@kadira/storybook";
 
 import { 
     specs as specsReal, 

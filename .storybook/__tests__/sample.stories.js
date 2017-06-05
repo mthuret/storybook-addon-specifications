@@ -1,5 +1,5 @@
 import React from "react";
-import {storiesOf, action} from '@storybook/react'
+import {storiesOf, action} from "@kadira/storybook"
 import { specs, describe, it} from '../../src'
 import {mount} from "enzyme";
 import expect from "expect";

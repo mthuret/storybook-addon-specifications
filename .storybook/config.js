@@ -1,4 +1,4 @@
-import * as storybook from '@storybook/react';
+import * as storybook from '@kadira/storybook';
 
 
 //THIS IS NEEDED ONLY IF YOU ARE USING MOCHA AS A TEST RUNNER

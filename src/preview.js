@@ -1,4 +1,4 @@
-import addons from '@storybook/addons';
+import addons from '@kadira/storybook-addons';
 import { EVENT_ID } from './';
 
 let currentStory = "";

@@ -3,4 +3,4 @@
 
 // Use the line below to register this addon
 import '../register';
-import '@storybook/react/addons';
+import '@kadira/storybook/addons';

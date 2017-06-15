@@ -27,16 +27,42 @@ export const describe = (storyName, func) => {
   return storyName;
 };
 
-export const it = function (desc, func) {
-  if(beforeEachFunc[currentStory]) beforeEachFunc[currentStory]();
+export const it = function(desc, func) {
+  const storyName = currentStory;
+
+  const pushGoodResult = () => {
+    results[storyName].goodResults.push(desc);
+  };
+
+  const pushWrongResult = (e) => {
+    console.error(`${storyName} - ${desc} : ${e}`);
+    results[storyName].wrongResults.push({ spec: desc, message: e.message });
+  };
+
+  const emitUpdate = () => {
+    const channel = addons.getChannel();
+    channel.emit(EVENT_ID, { results: results[storyName] });
+  };
+
+  const done = (e) => {
+    if (e) pushWrongResult(e);
+    else pushGoodResult();
+    emitUpdate();
+  };
+
+  if (beforeEachFunc[storyName]) beforeEachFunc[storyName]();
+
   try {
-    func();
-    results[currentStory].goodResults.push(desc);
+    if (func.length) func(done);
+    else {
+      func();
+      pushGoodResult();
+    }
   } catch (e) {
-    console.error(`${currentStory} - ${desc} : ${e}`);
-    results[currentStory].wrongResults.push({spec: desc, message: e.message});
+    pushWrongResult(e);
   }
-  if(afterEachFunc[currentStory]) afterEachFunc[currentStory]();
+
+  if (afterEachFunc[storyName]) afterEachFunc[storyName]();
 };
 
 export const before = function(func) {

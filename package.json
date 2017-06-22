@@ -46,7 +46,7 @@
     "react-test-renderer": "^15.3.1",
     "rimraf": "^2.5.4",
     "@storybook/react": "3.1.2",
-    "@storybook/ui": "3.1.0",
+    "@storybook/ui": "3.1.5",
     "@storybook/addons": "3.1.0"
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-specifications",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Add tests to your react storybook stories",
   "main": "dist/index.js",
   "scripts": {
@@ -47,7 +47,7 @@
     "rimraf": "^2.5.4",
     "@storybook/react": "3.1.5",
     "@storybook/ui": "3.2.3",
-    "@storybook/addons": "3.1.5"
+    "@storybook/addons": "3.2.0"
   },
   "dependencies": {
     "aphrodite": "^1.1.0"

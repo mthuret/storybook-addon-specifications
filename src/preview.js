@@ -10,20 +10,14 @@ const afterEachFunc = {};
 export function specs(specs) {
   let storyName = specs();
   const channel = addons.getChannel();
-  channel.emit(EVENT_ID, {results : results[storyName]});
+  channel.emit(EVENT_ID, { storyName, results: results[storyName] });
 }
 
 export const describe = (storyName, func) => {
   currentStory = storyName;
-  results[currentStory] = {
-    goodResults: [],
-    wrongResults: []
-  };
-
+  results[currentStory] = { goodResults: [], wrongResults: [] };
   func();
-
   if(afterFunc[currentStory]) afterFunc[currentStory]();
-
   return storyName;
 };
 
@@ -39,15 +33,15 @@ export const it = function(desc, func) {
     results[storyName].wrongResults.push({ spec: desc, message: e.message });
   };
 
-  const emitUpdate = () => {
+  const emitAsyncResultsUpdate = () => {
     const channel = addons.getChannel();
-    channel.emit(EVENT_ID, { results: results[storyName] });
+    channel.emit(EVENT_ID, { asyncResultsUpdate: true, storyName, results: results[storyName] });
   };
 
   const done = (e) => {
     if (e) pushWrongResult(e);
     else pushGoodResult();
-    emitUpdate();
+    emitAsyncResultsUpdate();
   };
 
   if (beforeEachFunc[storyName]) beforeEachFunc[storyName]();

@@ -2,6 +2,7 @@ import addons from '@storybook/addons';
 import { EVENT_ID } from './';
 
 let currentStory = "";
+const subStory = [];
 const results = {};
 const beforeEachFunc = {};
 const afterFunc = {};
@@ -14,14 +15,23 @@ export function specs(specs) {
 }
 
 export const describe = (storyName, func) => {
-  currentStory = storyName;
-  results[currentStory] = { goodResults: [], wrongResults: [] };
+  let first_describe = false
+  if (currentStory === "") {
+    first_describe = true
+    currentStory = storyName;
+    results[currentStory] = { goodResults: [], wrongResults: [] };
+  } else {
+    subStory.push(storyName)
+  }
   func();
   if(afterFunc[currentStory]) afterFunc[currentStory]();
+  subStory.pop()
+  if (first_describe) currentStory = ""
   return storyName;
 };
 
 export const it = function(desc, func) {
+  if (subStory.length) desc = subStory.join(" > ") + ": " + desc
   const storyName = currentStory;
 
   const pushGoodResult = () => {

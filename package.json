@@ -47,7 +47,7 @@
     "rimraf": "^2.5.4",
     "@storybook/ui": "3.2.4",
     "@storybook/react": "3.2.3",
-    "@storybook/addons": "3.2.6"
+    "@storybook/addons": "3.2.10"
   },
   "dependencies": {
     "aphrodite": "^1.1.0"

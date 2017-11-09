@@ -40,7 +40,7 @@
     "json": "^9.0.4",
     "mocha": "^3.0.2",
     "npm-run-all": "^4.0.2",
-    "react": "^15.3.0",
+    "react": "^16.1.0",
     "react-addons-test-utils": "^0.14.7 || ^15.0.0",
     "react-dom": "^15.3.0",
     "react-test-renderer": "^15.3.1",

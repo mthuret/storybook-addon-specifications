@@ -11,6 +11,7 @@ This addon for storybook will allow you to write tests based on your stories and
 ## Table of contents
 
 * [Getting Started](#getting-started)
+* [Using enzyme](#using-enzyme)
 * [Use your stories with a test runner](#use-your-stories-with-a-test-runner)
   * [Using Jest](#using-jest)
     * [Hooks and specifics jest features](#hooks-and-specifics-jest-features)
@@ -63,19 +64,34 @@ stories.add('Hello World', function () {
 });
 ```
 
-> Note : if you use enzyme, you will need to add the following lines to your webpack.config.js file. You also need to add the **json library** to your dev dependencies.
-
->```
->externals: {
->    'jsdom': 'window',
->    'cheerio': 'window',
->    'react/lib/ExecutionEnvironment': true,
->    'react/lib/ReactContext': 'window',
->    'react/addons': true,
->  }
->```
 
 You can use `beforeEach`, `before`, `after` and `afterEach` functions to mutualize or clean up some stuff.
+
+
+## Using enzyme
+
+To use enzyme inside storybooks, you will need to do the following: 
+
+1. Configure enzyme with an appropriate adapter inside your .storybook/config.js:
+   ```js
+   import {configure} from 'enzyme';
+   import Adapter from 'enzyme-adapter-react-16';
+
+   configure({ adapter: new Adapter() });
+   ```
+2. Add the following lines to your webpack.config.js:
+   ```
+   externals: {
+     'jsdom': 'window',
+     'cheerio': 'window',
+     'react/lib/ExecutionEnvironment': true,
+     'react/lib/ReactContext': 'window',
+     'react/addons': true,
+   }
+   ```
+3. Add the **json library** to your dev dependencies.
+
+
 
 ## Use your stories with a test runner
 

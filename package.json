@@ -52,7 +52,7 @@
     "rimraf": "^2.5.4"
   },
   "dependencies": {
-    "aphrodite": "^1.1.0"
+    "aphrodite": "^2.0.0"
   },
   "peerDependencies": {
     "@storybook/addons": "^3.0.0",

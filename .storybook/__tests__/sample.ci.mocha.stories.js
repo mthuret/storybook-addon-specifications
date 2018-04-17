@@ -37,6 +37,12 @@ stories.add('Hello World', function () {
       expect(output.text()).toContain('Hello World');
     });
 
+    describe('Expects should work nexted too', () => {
+      it('Should have the Hello World label', function () {
+        expect(output.text()).toContain('Hello World');
+      });
+    });
+
   }));
   return helloWorldStory;
 });

@@ -1,7 +1,9 @@
 import React from "react";
 import {storiesOf, action} from '@storybook/react'
 import { specs, describe, it} from '../../src'
-import {mount} from "enzyme";
+import Enzyme, {mount} from "enzyme"
+import Adapter from "enzyme-adapter-react-16"
+Enzyme.configure({ adapter: new Adapter() });
 import expect from "expect";
 
 

@@ -158,13 +158,13 @@ jest.mock('./.storybook/facade');
 
 Finally add this to your Jest configuration :
 
-```js
-"jest":{
+```json
+"jest": {
     "setupFiles": [
       "./path/to/your/jest/config/file.js"
     ],
     "automock": false,
-    }
+}
 ```
 
 #### Hooks and specifics jest features

@@ -4,6 +4,8 @@
 
 This addon for storybook will allow you to write tests based on your stories and display results directly inside storybook.
 
+⚠️ I don't have time to maintain this project anymore. If someone is interested to take over the maintainance and further development, please contact me. 
+
 > **If you want to learn more about the ideas behind this addon, you can read this article : [Building a react components living documentation using react-storybook.](https://medium.com/@mlthuret/building-a-react-components-living-documentation-using-react-storybook-5f11f0e7d23e#.5g58g5i3t).**
 
 ![](docs/screenshot.png)

@@ -29,6 +29,10 @@ export default class Specifications extends Component {
 
   render() {
     const results = this.state.results;
-    return <SpecificationsComponent results={results} />;
+    const { active } = this.props;
+
+    return active ? (
+      <SpecificationsComponent results={results} />
+    ) : null;
   }
 }

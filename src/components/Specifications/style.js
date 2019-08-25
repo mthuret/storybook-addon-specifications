@@ -9,7 +9,8 @@ export default StyleSheet.create({
     fontSize: 12,
     letterSpacing: 1,
     textDecoration: 'none',
-    listStyleType: 'none'
+    listStyleType: 'none',
+    border: '1px solid transparent'
   },
   error: {
     ':before': {

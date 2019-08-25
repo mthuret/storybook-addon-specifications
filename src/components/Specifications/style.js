@@ -6,7 +6,6 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: '-apple-system, ".SFNSText-Regular", "San Francisco", Roboto, "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif',
-    color: 'rgb(68, 68, 68)',
     fontSize: 12,
     letterSpacing: 1,
     textDecoration: 'none',
@@ -33,7 +32,6 @@ export default StyleSheet.create({
   },
 
   message: {
-    backgroundColor: 'rgb(250, 250, 250)',
     padding: '10px',
     margin: '10px'
   },

@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/mthuret/storybook-addon-specifications#readme",
   "devDependencies": {
-    "@storybook/addons": "5.2.0-beta.40",
+    "@storybook/addons": "5.2.0",
     "@storybook/react": "5.2.0-beta.40",
     "@storybook/ui": "3.2.17",
     "babel-cli": "^6.11.4",

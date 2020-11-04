@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-specifications",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Add tests to your react storybook stories",
   "main": "dist/index.js",
   "scripts": {
@@ -55,7 +55,7 @@
     "aphrodite": "^1.1.0"
   },
   "peerDependencies": {
-    "@storybook/addons": "^3.0.0",
+    "@storybook/addons": "^6.0.0",
     "react": "^0.14.7 || ^15.0.0 || ^16.0.0",
     "react-dom": "^0.14.7 || ^15.0.0 || ^16.0.0"
   },

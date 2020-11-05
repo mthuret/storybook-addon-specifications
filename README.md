@@ -60,6 +60,38 @@ stories.add('Hello World', function () {
       let output = mount(story);
       expect(output.text()).toContain('Hello World');
     });
+
+    // Asynchronous example using `done` syntax
+
+    it('Should have the Hello World label', function (done) {
+      let output = mount(story);
+      setTimeout(function() {
+        try {
+          expect(output.text()).toContain('Hello World');
+          done();
+        } catch (e) {
+          done(e);
+        }
+      })
+    });
+
+    // Asynchronous example using returned Promise,
+    // assuming a Promise implementation is available,
+    // also permits async/await where supported
+
+    it('Should have the Hello World label', function () {
+      let output = mount(story);
+      return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          try {
+            expect(output.text()).toContain('Hello World');
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        })
+      });
+    });
   }));
 
   return story;
@@ -72,7 +104,7 @@ You can use `beforeEach`, `before`, `after` and `afterEach` functions to mutuali
 
 ## Using enzyme
 
-To use enzyme inside storybooks, you will need to do the following: 
+To use enzyme inside storybooks, you will need to do the following:
 
 1. Configure enzyme with an appropriate adapter inside your .storybook/config.js:
    ```js
@@ -102,7 +134,7 @@ Writing tests directly next to the component declaration used for the story is a
 To do that, the idea is to add to the test runner, all the files used for declaring stories.
 But because this addon redefine describe and it functions, you'll need some extra-configuration to make the tests pass within the test runner.
 
-This repository has a [directory full of examples](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook) where you can find everything that is describe here. 
+This repository has a [directory full of examples](https://github.com/mthuret/storybook-addon-specifications/tree/master/.storybook) where you can find everything that is describe here.
 
 ### Using Jest
 
@@ -236,7 +268,7 @@ If for any reason you want to choose when to snapshot a story, that's also possi
 ```js
 export const snapshot = () => {};
 ```
-When storybook is going to run, it will do nothing with the snapshot function. 
+When storybook is going to run, it will do nothing with the snapshot function.
 
 ### Using Mocha
 
@@ -315,7 +347,7 @@ complexe in order to be able to use jsdom.
 >```js
 > // choose one of the following
 > import { jsdom } from 'jsdom'; // older versions of JSDOM
-> import { JSDOM } from 'jsdom'; // newer version 
+> import { JSDOM } from 'jsdom'; // newer version
 >/**
 > *Mocking browser-like DOM
 > */
@@ -345,7 +377,7 @@ complexe in order to be able to use jsdom.
 >global.navigator = global.window.navigator;
 >```
 
-or if you are a newer version of jsdom 
+or if you are a newer version of jsdom
 
 >```js
 >/**
@@ -403,16 +435,16 @@ import Example from './example'
 
 storiesOf('Example', module)
   .add('Default', () => {
-  
+
     // tests are loaded here
     specs(() => tests)
-    
+
     return <Example />
   })
 ```
 
-We must first override the Jest describe/it/expect blocks to use the storybook-addon-spec's implementation. 
-Add the following to your storybook config file. 
+We must first override the Jest describe/it/expect blocks to use the storybook-addon-spec's implementation.
+Add the following to your storybook config file.
 
 /.storybook/config.js
 

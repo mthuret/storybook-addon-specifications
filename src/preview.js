@@ -49,7 +49,10 @@ export const it = function(desc, func) {
   try {
     if (func.length) func(done);
     else {
-      func();
+      const result = func();
+      if (result && typeof result.then === 'function') {
+        return result.then(() => done(), (e) => done(e || { message: 'failed' }));
+      }
       pushGoodResult();
     }
   } catch (e) {

@@ -29,7 +29,12 @@ stories.add('Hello World', function () {
       expect(output.text()).toContain('Hello World');
     });
 
-    it('Should have the Hello World label', function () {
+    it('Should have the Hello World label', function (done) {
+      expect(output.text()).toContain('Hello World');
+      done();
+    });
+
+    it('Should have the Hello World label', async function () {
       expect(output.text()).toContain('Hello World');
     });
 

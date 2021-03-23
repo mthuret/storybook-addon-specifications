@@ -21,7 +21,8 @@
     "storybook",
     "tests",
     "react",
-    "specifications"
+    "specifications",
+    "storybook-addon"
   ],
   "license": "MIT",
   "bugs": {
